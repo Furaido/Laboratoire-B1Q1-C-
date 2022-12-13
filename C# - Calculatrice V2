@@ -8,7 +8,6 @@ decimal resultat = 0;
 decimal tmp;
 string operation;
 
-
 Console.WriteLine("Veuillez insérer un nombre");
 Console.Write("> ");
 nb = decimal.Parse(Console.ReadLine());
