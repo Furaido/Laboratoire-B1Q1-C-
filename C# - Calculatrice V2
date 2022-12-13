@@ -1,0 +1,56 @@
+Console.WriteLine("Calculatrice");
+Console.WriteLine("Cette calculatrice n'applique pas la priorité des opérations !");
+Console.WriteLine();
+
+decimal nb;
+decimal nb1;
+decimal resultat = 0;
+decimal tmp;
+string operation;
+
+
+Console.WriteLine("Veuillez insérer un nombre");
+Console.Write("> ");
+nb = decimal.Parse(Console.ReadLine());
+Console.WriteLine();
+
+tmp = nb;
+
+do
+{
+    Console.WriteLine("Veuillez insérer une opération (+, -, *, /) (terminez votre opération par un \"=\"");
+    Console.Write("> ");
+    operation = Console.ReadLine();
+    Console.WriteLine();
+
+    if(operation != "=") {
+
+        Console.WriteLine("Veuillez insérer un nombre");
+        Console.Write("> ");
+        nb1 = decimal.Parse(Console.ReadLine());
+        Console.WriteLine();
+
+        switch(operation)
+        {
+            case "+": resultat = tmp + nb1; break; 
+            case "-": resultat = tmp - nb1; break;
+            case "*": resultat = tmp * nb1; break;
+            case "/":
+                if (nb1 != 0)
+                {
+                    resultat = tmp / nb1;
+                } else
+                {
+                    Console.WriteLine("Vous ne pouvez pas diviser un nombre par 0 !");
+                    Thread.Sleep(2000);
+                    Environment.Exit(0);
+                }
+                break;
+        }
+    }
+
+    tmp = resultat;
+
+} while (operation != "=");
+
+Console.WriteLine($"Le résultat de votre opération est : {resultat}");
