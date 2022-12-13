@@ -1,0 +1,179 @@
+//Ce code est une amélioration d'un des exercices du prof sur les tableaux.
+//Sachez qu'ici, toutes les tâches à faire sont demandées à l'utilisateur.
+//Ce code n'est pas parfait mais reste fonctionnable.
+
+int ErreurTab(ref int a)
+{
+    while (a <= 0)
+    {
+        Console.WriteLine("Erreur : Impossible de créer votre tableau !");
+        Console.WriteLine();
+        Thread.Sleep(500);
+
+        Console.WriteLine("Veuillez insérer un autre nombre");
+        Console.Write("> ");
+        a = int.Parse(Console.ReadLine());
+        Console.Clear();
+    }
+
+    return a;
+}
+int ErreurPosition(int a, ref int b)
+{
+    while (a < b || b < 0)
+    {
+        Console.WriteLine("Erreur : Impossible de trouver la colonne !");
+        Console.WriteLine();
+        Thread.Sleep(500);
+
+        Console.WriteLine("Veuillez insérer un autre nombre");
+        Console.Write("> ");
+        b = int.Parse(Console.ReadLine());
+        Console.Clear();
+    }
+    return b;
+}
+
+Console.WriteLine("Veuillez insérer un nombre de colonne");
+Console.Write("> ");
+int c = int.Parse(Console.ReadLine());
+Console.Clear();
+ErreurTab(ref c);
+
+Console.WriteLine("Veuillez insérer un nombre de ligne");
+Console.Write("> ");
+int l = int.Parse(Console.ReadLine());
+Console.Clear();
+ErreurTab(ref l);
+
+int[,] tab = new int[c, l];
+
+void AfficheTab()
+{
+    for (int i = 0; i < tab.GetLength(0); i++)
+    {
+        Console.WriteLine();
+        for (int j = 0; j < tab.GetLength(1); j++)
+        {
+            Console.Write(tab[i, j]);
+        }
+    }
+}
+
+Console.WriteLine($"Votre tableau de {c} sur {l} à bien été créé !");
+Thread.Sleep(1200);
+Console.Clear();
+
+Console.WriteLine("Vous allez devoir insérer des positions en lien avec votre tableau");
+Console.WriteLine($"Veuillez donc respecter les dimensions de votre tableau ! ({c} sur {l})");
+Thread.Sleep(2000);
+Console.Clear();
+
+Console.WriteLine("Combien de case du tableau voulez vous modifier ?");
+Console.Write("> ");
+int nbPosition = int.Parse(Console.ReadLine());
+Console.Clear();
+
+List<int> ligne = new List<int>();
+List<int> colonne = new List<int>();
+
+if (nbPosition != 0)
+{
+    while (nbPosition > tab.Length || nbPosition < 0)
+    {
+        Console.WriteLine("Erreur : La valeur que vous avez entrée ne fait pas partie de la dimension de votre tableau");
+        Console.WriteLine();
+        Thread.Sleep(1200);
+
+        Console.WriteLine("Veuillez insérer un autre nombre");
+        Console.Write("> ");
+        nbPosition = int.Parse(Console.ReadLine());
+        Console.Clear();
+    }
+
+    Console.WriteLine($"Vous allez modifier {nbPosition} dans votre tableau !");
+    Thread.Sleep(2000);
+    Console.Clear();
+
+    for (int i = 0; i < nbPosition; i++)
+    {
+        Console.WriteLine("Veuillez insérer le numéro de la colonne !");
+        Console.Write("> ");
+        int pC = int.Parse(Console.ReadLine());
+        Console.Clear();
+
+        ErreurPosition(c, ref pC);
+        colonne.Add(pC);
+
+        Console.WriteLine("Veuillez insérer le numéro de la ligne !");
+        Console.Write("> ");
+        int pL = int.Parse(Console.ReadLine());
+        Console.Clear();
+
+        ErreurPosition(l, ref pL);
+        ligne.Add(pL);
+    }
+
+    Console.WriteLine("Vos positions ont bien été enregistrées avec succès !");
+    Thread.Sleep(1200);
+    Console.Clear();
+
+    Console.WriteLine("Désormais, vous allez devoir choisir un nombre à remplacer au position indiqué !");
+    Console.WriteLine();
+    Thread.Sleep(800);
+
+    Console.WriteLine("Veuillez insérer un nombre entre -1000 et 1000 !");
+    Console.Write("> ");
+
+    int nb = int.Parse(Console.ReadLine());
+    while (nb > 1000 || nb < -1000)
+    {
+        Console.WriteLine("Erreur : L'intervale de nombre n'est pas respecté !");
+        Console.WriteLine();
+        Thread.Sleep(500);
+
+        Console.WriteLine("Veuillez insérer un nombre entre -1000 et 1000 !");
+        Console.Write("> ");
+        nb = int.Parse(Console.ReadLine());
+        Console.Clear();
+    }
+
+    Console.WriteLine($"Le nombre que vous avez choisi est : {nb}");
+    Thread.Sleep(1200);
+    Console.Clear();
+
+    Console.WriteLine("Voici votre tableau non modifié");
+    Thread.Sleep(1200);
+    Console.WriteLine();
+
+    AfficheTab();
+
+    Thread.Sleep(5000);
+    Console.Clear();
+
+    for (int i = 0; i < nbPosition; i++)
+    {
+        tab[colonne[i], ligne[i]] = nb;
+    }
+
+    Console.WriteLine("Voici votre tableau après la modification");
+    Thread.Sleep(1200);
+    Console.WriteLine();
+
+    AfficheTab();
+
+    Thread.Sleep(5000);
+    Console.Clear();
+    return;
+} else
+{
+    Console.WriteLine("Voici votre tableau non modifié");
+    Thread.Sleep(1200);
+    Console.WriteLine();
+
+    AfficheTab();
+
+    Thread.Sleep(5000);
+    Console.Clear();
+    return;
+}
