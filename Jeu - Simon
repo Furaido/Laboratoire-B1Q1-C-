@@ -1,0 +1,132 @@
+Console.WriteLine("Jeu du Simon");
+Console.WriteLine();
+
+Console.WriteLine("Niveau de jeu :");
+Console.WriteLine();
+Console.WriteLine("1. Facile");
+Console.WriteLine("2. Normal");
+Console.WriteLine("3. Difficile");
+Console.WriteLine("4. Dieu");
+Console.WriteLine("5. Impossible");
+
+Console.WriteLine();
+Console.WriteLine("Avec quel niveau voulez-vous jouer ?");
+Console.Write("> ");
+int level = int.Parse(Console.ReadLine());
+
+string nomLevel;
+
+if (level == 1)
+{
+    nomLevel = "Facile";
+}
+else if (level == 2)
+{
+    nomLevel = "Normal";
+}
+else if (level == 3)
+{
+    nomLevel = "Difficile";
+}
+else if (level == 4)
+{
+    nomLevel = "Dieu";
+}
+else if (level == 5)
+{
+    nomLevel = "Impossible";
+}
+else
+{
+    Console.WriteLine("Impossible de trouver le niveau !");
+    Thread.Sleep(2000);
+    Console.Clear();
+    return;
+}
+
+int temps = 0;
+
+switch (level)
+{
+    case 1:
+        temps = 2000;
+        break;
+    case 2:
+        temps = 1000;
+        break;
+    case 3:
+        temps = 500;
+        break;
+    case 4:
+        temps = 250;
+        break;
+    case 5:
+        temps = 100;
+        break;
+    default:
+        temps = 1000;
+        break;
+}
+
+Console.WriteLine($"Vous souhaitez jouer en {nomLevel}");
+Thread.Sleep(1200);
+Console.Clear();
+
+bool win = false;
+Random Random = new Random();
+
+List<string> simon = new List<string>();
+simon.Add("a"); simon.Add("b"); simon.Add("0");
+simon.Add("c"); simon.Add("d"); simon.Add("1");
+simon.Add("e"); simon.Add("f"); simon.Add("2");
+simon.Add("g"); simon.Add("h"); simon.Add("3");
+simon.Add("i"); simon.Add("j"); simon.Add("4");
+simon.Add("k"); simon.Add("l"); simon.Add("5");
+simon.Add("m"); simon.Add("n"); simon.Add("6");
+simon.Add("o"); simon.Add("p"); simon.Add("7");
+simon.Add("q"); simon.Add("r"); simon.Add("8");
+simon.Add("s"); simon.Add("t"); simon.Add("9");
+simon.Add("u"); simon.Add("v"); 
+simon.Add("w"); simon.Add("x"); 
+simon.Add("y"); simon.Add("z");
+
+List<int> tmp = new List<int>();
+int nb = 1;
+
+while (win == false) {
+    for (int i = 0; i < nb; i++)
+    {
+        tmp.Add(Random.Next(simon.Count));
+        Console.Write(simon[tmp[i]]);
+        Thread.Sleep(temps);
+        Console.Clear();
+    }
+
+    for (int i = 0; i < nb; i++)
+    {
+        Console.WriteLine("Quel caractère avez-vous vu ?");
+        Console.Write("> ");
+        string entree = Console.ReadLine();
+
+        if (entree == simon[tmp[i]])
+        {
+            Thread.Sleep(500);
+            Console.Clear();
+        }
+        else
+        {
+            Console.WriteLine("perdu !!!");
+            Thread.Sleep(1200);
+            Console.Clear();
+            return;
+        }
+    }
+
+    if (nb == 6)
+        win = true;
+    nb++;
+}
+
+Console.WriteLine("Vous avez Gagné !!!");
+Thread.Sleep(2200);
+Console.Clear();
