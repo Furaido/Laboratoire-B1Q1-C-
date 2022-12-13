@@ -1,0 +1,67 @@
+Console.WriteLine("Calculatrice");
+Console.WriteLine();
+
+double resultat = 0;
+double tmp = 0;
+string operation;
+double nb;
+double nb1;
+
+Console.WriteLine("Veuillez insérer un nombre");
+Console.Write("> ");
+nb = double.Parse(Console.ReadLine());
+Console.WriteLine();
+
+tmp = nb;
+
+do {
+    
+    Console.WriteLine("Veuillez insérer une opération (+, -, *, /) (terminez votre calcul avec un \"=\")");
+    Console.Write("> ");
+    operation = Console.ReadLine();
+    Console.WriteLine();
+
+    if (operation != "=")
+    {
+        Console.WriteLine("Veuillez insérer un nombre");
+        Console.Write("> ");
+        nb1 = double.Parse(Console.ReadLine());
+        Console.WriteLine();
+
+        switch (operation)
+        {
+            case "+":
+                resultat = tmp + nb1;
+                break;
+            case "-":
+                resultat = tmp - nb1;
+                break;
+            case "*":
+                resultat = tmp * nb1;
+                break;
+            case "/":
+                if (nb1 != 0)
+                {
+                    resultat = tmp / nb1;
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Il est impossible de diviser un nombre par zéro !");
+                    Thread.Sleep(2000);
+                    Environment.Exit(0);
+                }
+                break;
+            default:
+                    Console.WriteLine("Ce n'est pas une operation valide !");
+                    Thread.Sleep(2000);
+                    Environment.Exit(0);
+                break;
+        }
+    }
+
+    tmp = resultat;
+
+} while (operation != "=") ;
+
+Console.WriteLine($"Le résultat est : {resultat}");
