@@ -1,0 +1,59 @@
+Console.WriteLine("Bienvenue dans Number Riddle!\n");
+Console.WriteLine("Vous allez devoir deviner un nombre généré aléatoirement entre 0 et 100.");
+Console.WriteLine("Votre nombre a bien été généré... Veuillez désormais écrire un nombre entre 0 et 100!\n");
+
+Random random = new Random();
+int rdm = random.Next(101);
+
+int choice;
+bool win = false;
+int round = 5;
+
+while (round >= 0 && !win)
+{
+    do
+    {
+        Console.Write("> ");
+        if (int.TryParse(Console.ReadLine(), out choice))
+        {
+            if (choice < 0 || choice > 100)
+            {
+                Console.WriteLine("\nErreur - Veuillez insérer un nombre entre 0 et 100 inclus.");
+            }
+        }
+        else
+        {
+            Console.WriteLine("\nErreur - Veuillez insérer un nombre valide entre 0 et 100.");
+            choice = -1;
+        }
+    } while (choice < 0 || choice > 100);
+
+    if (choice == rdm)
+    {
+        Console.WriteLine("\nFélicitation !, vous avez deviné le nombre !");
+        win = true;
+        break;
+    }
+    else
+    {
+        if (choice < rdm)
+        {
+            Console.WriteLine("\nLe nombre généré est plus grand que votre nombre !");
+        }
+        else
+        {
+            Console.WriteLine("\nLe nombre généré est plus petit que votre nombre !");
+        }
+
+        Console.WriteLine("Il vous reste encore " + round + " tentative(s) !\n");
+        round--;
+    }
+}
+
+if (!win)
+{
+    Console.WriteLine("\nDommage, vous avez perdu :(");
+    Console.WriteLine("Le nombre généré était > " + rdm);
+}
+
+Console.WriteLine("\nFin du programme !");
